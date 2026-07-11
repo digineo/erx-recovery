@@ -7,7 +7,7 @@ It has been tested under Ubuntu 20.04.
 
 ## Requirements
 
-* Linux
+* Linux or MacOS
 * Serial console attached to the EdgeRouter X.
 * `eth0` of the EdgeRouter X connected to the local machine.
 

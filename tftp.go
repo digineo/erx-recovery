@@ -9,7 +9,7 @@ import (
 	"path"
 
 	"github.com/google/goterm/term"
-	"github.com/pin/tftp"
+	"github.com/pin/tftp/v3"
 )
 
 const kernelFilename = "vme50"
@@ -38,9 +38,9 @@ func tftpReadHandler(filename string, rf io.ReaderFrom) error {
 	remoteAddr := rf.(tftp.OutgoingTransfer).RemoteAddr().IP
 
 	// Figure out remote MAC address
-	mac := getMACAddress(localInterface.Index, remoteAddr)
-	if mac == nil {
-		log.Fatalf("unable to get MAC address for %v", remoteAddr)
+	mac, err := getMACAddress(localInterface, remoteAddr)
+	if err != nil {
+		log.Fatalf("unable to get MAC address for %v: %v", remoteAddr, err)
 	}
 
 	log.Println(term.Greenf("Download started from %v (%v)", remoteAddr, mac))
